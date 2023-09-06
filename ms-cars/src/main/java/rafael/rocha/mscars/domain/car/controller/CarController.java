@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/v1/cars")
 public class CarController {
 
-
     @Autowired
     private CarService carService;
 

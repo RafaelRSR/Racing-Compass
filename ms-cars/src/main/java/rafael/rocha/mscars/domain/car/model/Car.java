@@ -18,7 +18,6 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "car_id")
     private String id;
     private String brand;
     private String model;
