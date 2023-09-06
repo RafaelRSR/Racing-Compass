@@ -8,4 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
+    boolean existsByBrandAndModel(String brand, String model);
 }

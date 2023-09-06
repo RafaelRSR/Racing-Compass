@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import rafael.rocha.mscars.domain.car.dto.CarRequestDTO;
 import rafael.rocha.mscars.domain.car.dto.CarResponseDTO;
 import rafael.rocha.mscars.domain.car.exceptions.CarNotFoundException;
+import rafael.rocha.mscars.domain.car.exceptions.DuplicateCarException;
 import rafael.rocha.mscars.domain.car.model.Car;
 import rafael.rocha.mscars.domain.car.repository.CarRepository;
 
@@ -30,6 +31,9 @@ public class CarService {
     }
 
     public CarResponseDTO createCar(CarRequestDTO carRequestDTO) {
+        if (carRepository.existsByBrandAndModel(carRequestDTO.getBrand(), carRequestDTO.getModel())) {
+            throw new DuplicateCarException("A car with the same brand and model already exists.");
+        }
         Car carEntity = modelMapper.map(carRequestDTO, Car.class);
         Car savedCar = carRepository.save(carEntity);
         return modelMapper.map(savedCar, CarResponseDTO.class);
