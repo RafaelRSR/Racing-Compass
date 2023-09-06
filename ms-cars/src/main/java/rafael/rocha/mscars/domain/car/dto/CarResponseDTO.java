@@ -1,6 +1,9 @@
-package rafael.rocha.mscars.domain.car.model;
+package rafael.rocha.mscars.domain.car.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,21 +12,17 @@ import rafael.rocha.mscars.domain.pilot.model.Pilot;
 
 import java.util.Date;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Car {
-
+public class CarResponseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "car_id")
     private String id;
     private String brand;
     private String model;
     private Date year;
     @ManyToOne
     private Pilot pilot;
-
 }
