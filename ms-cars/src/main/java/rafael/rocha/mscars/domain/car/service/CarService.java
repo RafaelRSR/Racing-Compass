@@ -7,7 +7,6 @@ import rafael.rocha.mscars.domain.car.dto.CarRequestDTO;
 import rafael.rocha.mscars.domain.car.dto.CarResponseDTO;
 import rafael.rocha.mscars.domain.car.exceptions.CarNotFoundException;
 import rafael.rocha.mscars.domain.car.exceptions.DuplicateCarException;
-import rafael.rocha.mscars.domain.pilot.exceptions.DuplicatePilotException;
 import rafael.rocha.mscars.domain.car.model.Car;
 import rafael.rocha.mscars.domain.car.repository.CarRepository;
 import rafael.rocha.mscars.domain.pilot.model.Pilot;
