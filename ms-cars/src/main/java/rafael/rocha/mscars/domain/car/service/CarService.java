@@ -7,10 +7,14 @@ import rafael.rocha.mscars.domain.car.dto.CarRequestDTO;
 import rafael.rocha.mscars.domain.car.dto.CarResponseDTO;
 import rafael.rocha.mscars.domain.car.exceptions.CarNotFoundException;
 import rafael.rocha.mscars.domain.car.exceptions.DuplicateCarException;
+import rafael.rocha.mscars.domain.pilot.exceptions.DuplicatePilotException;
 import rafael.rocha.mscars.domain.car.model.Car;
 import rafael.rocha.mscars.domain.car.repository.CarRepository;
+import rafael.rocha.mscars.domain.pilot.model.Pilot;
+import rafael.rocha.mscars.domain.pilot.repository.PilotRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -18,6 +22,8 @@ public class CarService {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private PilotRepository pilotRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -34,7 +40,16 @@ public class CarService {
         if (carRepository.existsByBrandAndModel(carRequestDTO.getBrand(), carRequestDTO.getModel())) {
             throw new DuplicateCarException("A car with the same brand and model already exists.");
         }
+
+        Optional<Pilot> existingPilot = pilotRepository.findByName(carRequestDTO.getPilot().getName());
+        if (!existingPilot.isPresent()) {
+            Pilot newPilot = modelMapper.map(carRequestDTO.getPilot(), Pilot.class);
+            existingPilot = Optional.of(pilotRepository.save(newPilot));
+        }
+
         Car carEntity = modelMapper.map(carRequestDTO, Car.class);
+        carEntity.setPilot(existingPilot.get());
+
         Car savedCar = carRepository.save(carEntity);
         return modelMapper.map(savedCar, CarResponseDTO.class);
     }

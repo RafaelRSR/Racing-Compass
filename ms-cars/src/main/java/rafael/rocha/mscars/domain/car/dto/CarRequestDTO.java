@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import rafael.rocha.mscars.domain.pilot.model.Pilot;
 
 
 import java.util.Date;
@@ -16,5 +17,5 @@ public class CarRequestDTO {
     private String brand;
     private String model;
     private Date year;
-    private Long pilotId;
+    private Pilot pilot;
 }
