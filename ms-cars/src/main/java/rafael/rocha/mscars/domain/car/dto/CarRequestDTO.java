@@ -1,5 +1,6 @@
 package rafael.rocha.mscars.domain.car.dto;
 
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +18,7 @@ public class CarRequestDTO {
     private String brand;
     private String model;
     private Date year;
+
+    @ManyToOne
     private Pilot pilot;
 }
