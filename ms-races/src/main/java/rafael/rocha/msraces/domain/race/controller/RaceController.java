@@ -24,7 +24,7 @@ public class RaceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(raceResponseDTO);
     }
 
-    @PostMapping("/simulate{raceId}")
+    @PostMapping("/simulate/{raceId}")
     public ResponseEntity<List<RaceResultDTO>> simulateRaceAndSendResult(@PathVariable Long raceId) {
         List<RaceResultDTO> raceResults = raceService.simulateRaceById(raceId);
         return new ResponseEntity<>(raceResults, HttpStatus.OK);
