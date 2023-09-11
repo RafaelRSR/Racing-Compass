@@ -5,29 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rafael.rocha.msraces.domain.track.model.Track;
 import rafael.rocha.mscars.domain.car.model.Car;
-
-import java.util.List;
-
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Race {
+public class RaceResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Car> carList;
+    private int position;
+
     @ManyToOne
-    private Track track;
-
-    @OneToMany
-    private List<RaceResult> raceResults;
-
+    private Car car;
 }
