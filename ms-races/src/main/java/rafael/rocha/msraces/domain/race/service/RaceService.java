@@ -1,5 +1,7 @@
 package rafael.rocha.msraces.domain.race.service;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import rafael.rocha.mscars.domain.car.model.Car;
 import rafael.rocha.msraces.config.CarFeignClient;
 import rafael.rocha.msraces.domain.race.dto.RaceRequestDTO;
 import rafael.rocha.msraces.domain.race.dto.RaceResponseDTO;
+import rafael.rocha.msraces.domain.race.dto.RaceResultDTO;
 import rafael.rocha.msraces.domain.race.model.Race;
 import rafael.rocha.msraces.domain.race.repository.RaceRepository;
 
@@ -22,9 +25,11 @@ public class RaceService {
     private RaceRepository raceRepository;
     @Autowired
     private CarFeignClient carFeignClient;
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     public RaceResponseDTO createRace(RaceRequestDTO raceRequestDTO) {
@@ -32,22 +37,24 @@ public class RaceService {
 
         List<Car> randomCars = selectRandomCars(allCars);
 
-        Race race = new Race();
+        Race race = modelMapper.map(raceRequestDTO, Race.class);
         race.setCarList(randomCars);
 
-        race = raceRepository.save(race);
+        race = raceRepository.save(race); //
 
-        RaceResponseDTO raceResponseDTO = new RaceResponseDTO();
-        raceResponseDTO.setId(race.getId());
-
-        return raceResponseDTO;
+        return modelMapper.map(race, RaceResponseDTO.class);
     }
 
-    public void simulateRaceAndSendResult() {
-        List<Car> selectedCars = selectRandomCars(carFeignClient.getAllCars());
-        List<Car> raceResults = simulateRace(selectedCars);
+    public List<RaceResultDTO> simulateRaceById(Long raceId) {
+        Race race = raceRepository.findById(raceId)
+                .orElseThrow(() -> new EntityNotFoundException("Race not found with ID: " + raceId));
+
+        List<Car> selectedCars = race.getCarList();
+        List<RaceResultDTO> raceResults = simulateRace(selectedCars);
 
         rabbitTemplate.convertAndSend("raceResultQueue", raceResults);
+
+        return raceResults;
     }
 
     public List<Car> selectRandomCars(List<Car> allCars) {
@@ -60,9 +67,19 @@ public class RaceService {
         return allCars.subList(0, numberOfCarsToSelect);
     }
 
-    private List<Car> simulateRace(List<Car> selectedCars) {
-        List<Car> raceResults = new ArrayList<>(selectedCars);
-        Collections.shuffle(raceResults);
+    private List<RaceResultDTO> simulateRace(List<Car> selectedCars) {
+        List<RaceResultDTO> raceResults = new ArrayList<>();
+        List<Car> shuffledCars = new ArrayList<>(selectedCars);
+        Collections.shuffle(shuffledCars);
+
+        for (int i = 0; i < shuffledCars.size(); i++) {
+            Car car = shuffledCars.get(i);
+            RaceResultDTO raceResultDTO = new RaceResultDTO();
+            raceResultDTO.setCar(car);
+            raceResultDTO.setPosition(i + 1);
+            raceResults.add(raceResultDTO);
+        }
         return raceResults;
     }
+
 }
