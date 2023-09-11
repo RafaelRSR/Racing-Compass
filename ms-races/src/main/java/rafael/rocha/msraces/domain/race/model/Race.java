@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rafael.rocha.msraces.domain.track.Track;
+import rafael.rocha.msraces.domain.track.model.Track;
+import rafael.rocha.mscars.domain.car.model.Car;
+
+import java.util.List;
 
 
 @Entity
@@ -19,8 +22,9 @@ public class Race {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany
     private List<Car> carList;
-    @Transient
+    @ManyToOne
     private Track track;
 
 }
