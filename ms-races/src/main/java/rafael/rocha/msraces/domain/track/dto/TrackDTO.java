@@ -1,5 +1,6 @@
 package rafael.rocha.msraces.domain.track.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,7 @@ public class TrackDTO {
 
     private String name;
     private String country;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 }

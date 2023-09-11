@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import rafael.rocha.mscars.domain.car.dto.CarResponseDTO;
+import rafael.rocha.mscars.domain.car.model.Car;
 import rafael.rocha.msraces.domain.track.dto.TrackDTO;
 
 import java.util.List;
@@ -16,6 +17,6 @@ import java.util.List;
 public class RaceResponseDTO {
 
     private Long id;
-    private List<CarResponseDTO> cars;
+    private List<Car> cars;
     private TrackDTO track;
 }

@@ -22,7 +22,7 @@ public class Race {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @Transient
     private List<Car> carList;
     @ManyToOne
     private Track track;

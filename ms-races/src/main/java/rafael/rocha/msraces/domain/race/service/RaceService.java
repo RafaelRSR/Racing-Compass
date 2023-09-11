@@ -13,10 +13,7 @@ import rafael.rocha.msraces.domain.race.dto.RaceResultDTO;
 import rafael.rocha.msraces.domain.race.model.Race;
 import rafael.rocha.msraces.domain.race.repository.RaceRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class RaceService {
@@ -40,9 +37,12 @@ public class RaceService {
         Race race = modelMapper.map(raceRequestDTO, Race.class);
         race.setCarList(randomCars);
 
-        race = raceRepository.save(race); //
+        race = raceRepository.save(race);
 
-        return modelMapper.map(race, RaceResponseDTO.class);
+        RaceResponseDTO raceResponseDTO = modelMapper.map(race, RaceResponseDTO.class);
+        raceResponseDTO.setCars(randomCars); // Set the cars in the DTO
+
+        return raceResponseDTO;
     }
 
     public List<RaceResultDTO> simulateRaceById(Long raceId) {
@@ -67,19 +67,17 @@ public class RaceService {
         return allCars.subList(0, numberOfCarsToSelect);
     }
 
-    private List<RaceResultDTO> simulateRace(List<Car> selectedCars) {
+    public List<RaceResultDTO> simulateRace(List<Car> selectedCars) {
         List<RaceResultDTO> raceResults = new ArrayList<>();
         List<Car> shuffledCars = new ArrayList<>(selectedCars);
         Collections.shuffle(shuffledCars);
 
         for (int i = 0; i < shuffledCars.size(); i++) {
             Car car = shuffledCars.get(i);
-            RaceResultDTO raceResultDTO = new RaceResultDTO();
-            raceResultDTO.setCar(car);
+            RaceResultDTO raceResultDTO = modelMapper.map(car, RaceResultDTO.class);
             raceResultDTO.setPosition(i + 1);
             raceResults.add(raceResultDTO);
         }
         return raceResults;
     }
-
 }

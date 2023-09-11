@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import rafael.rocha.mscars.domain.car.model.Car;
 
+import java.util.List;
+
+
 @Entity
 @Data
 @Builder
@@ -20,6 +23,6 @@ public class RaceResult {
 
     private int position;
 
-    @ManyToOne
+    @Transient
     private Car car;
 }
