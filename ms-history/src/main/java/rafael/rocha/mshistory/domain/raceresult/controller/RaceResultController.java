@@ -26,7 +26,7 @@ public class RaceResultController {
         return ResponseEntity.ok(raceResults);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Object> getResultById(@PathVariable Long id) {
         Optional<RaceResultDocument> raceResult = raceResultService.getRaceResultById(id);
         return raceResult.<ResponseEntity<Object>>map(ResponseEntity::ok)

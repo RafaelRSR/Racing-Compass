@@ -54,7 +54,7 @@ class RaceResultControllerTest {
     void getResultById() throws Exception {
         when(raceResultService.getRaceResultById(1L)).thenReturn(Optional.of(testRaceResult));
 
-        ResultActions result = mockMvc.perform(get("/v1/race-results/1")
+        ResultActions result = mockMvc.perform(get("/v1/race-results/get/1")
                 .contentType(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isOk())
@@ -73,7 +73,7 @@ class RaceResultControllerTest {
 
         when(raceResultService.getRaceResultById(2L)).thenReturn(Optional.empty());
 
-        ResultActions result = mockMvc.perform(get("/v1/race-results/2")
+        ResultActions result = mockMvc.perform(get("/v1/race-results/get/2")
                 .contentType(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isNotFound())
