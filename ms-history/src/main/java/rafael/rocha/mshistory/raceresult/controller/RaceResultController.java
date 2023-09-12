@@ -1,6 +1,7 @@
 package rafael.rocha.mshistory.raceresult.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +26,10 @@ public class RaceResultController {
         return ResponseEntity.ok(raceResults);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RaceResultDocument> getRaceResultById(@PathVariable Long id) {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Object> getResultById(@PathVariable Long id) {
         Optional<RaceResultDocument> raceResult = raceResultService.getRaceResultById(id);
-        return raceResult.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return raceResult.<ResponseEntity<Object>>map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Race result not found!"));
     }
 }
