@@ -1,5 +1,7 @@
 package rafael.rocha.msraces.domain.race.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -24,9 +26,10 @@ public class RaceService {
     private CarFeignClient carFeignClient;
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
     public RaceResponseDTO createRace(RaceRequestDTO raceRequestDTO) {
@@ -40,7 +43,7 @@ public class RaceService {
         race = raceRepository.save(race);
 
         RaceResponseDTO raceResponseDTO = modelMapper.map(race, RaceResponseDTO.class);
-        raceResponseDTO.setCars(randomCars); // Set the cars in the DTO
+        raceResponseDTO.setCars(randomCars);
 
         return raceResponseDTO;
     }
@@ -53,6 +56,13 @@ public class RaceService {
         List<RaceResultDTO> raceResults = simulateRace(selectedCars);
 
         rabbitTemplate.convertAndSend("raceResultQueue", raceResults);
+        List<String> jsonRaceResults = raceResults.stream()
+                .map(this::convertToJson)
+                .toList();
+
+        for (String jsonResult : jsonRaceResults) {
+            rabbitTemplate.convertAndSend("raceResultQueue", jsonResult);
+        }
 
         return raceResults;
     }
@@ -79,5 +89,13 @@ public class RaceService {
             raceResults.add(raceResultDTO);
         }
         return raceResults;
+    }
+
+    private String convertToJson(RaceResultDTO raceResultDTO) {
+        try {
+            return objectMapper.writeValueAsString(raceResultDTO);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
     }
 }

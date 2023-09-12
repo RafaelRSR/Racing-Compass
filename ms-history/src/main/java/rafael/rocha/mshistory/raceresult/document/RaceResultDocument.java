@@ -1,4 +1,4 @@
-package rafael.rocha.mshistory.race.document;
+package rafael.rocha.mshistory.raceresult.document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +11,18 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "races")
-public class RaceDocument {
+@Document(collection = "race_result")
+public class RaceResultDocument {
     @Id
-    private Long id;
-    private String raceName;
+    private String id;
+
+    private int position;
+
+    private String carBrand;
+
+    private String carModel;
+
+    private String pilotName;
+
     private Date raceDate;
 }

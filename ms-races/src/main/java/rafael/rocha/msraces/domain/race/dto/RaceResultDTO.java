@@ -1,6 +1,5 @@
 package rafael.rocha.msraces.domain.race.dto;
 
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
