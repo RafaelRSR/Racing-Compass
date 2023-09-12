@@ -1,5 +1,6 @@
 package rafael.rocha.msraces.domain.race.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,6 +40,9 @@ class RaceServiceTest {
 
     @Mock
     private RabbitTemplate rabbitTemplate;
+
+    @Spy
+    private ObjectMapper objectMapper;
 
     @Spy
     private ModelMapper modelMapper;
