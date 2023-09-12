@@ -73,7 +73,7 @@ class RaceResultControllerTest {
 
         when(raceResultService.getRaceResultById(2L)).thenReturn(Optional.empty());
 
-        ResultActions result = mockMvc.perform(get("/api/race-results/get/2")
+        ResultActions result = mockMvc.perform(get("/v1/race-results/2")
                 .contentType(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isNotFound())
