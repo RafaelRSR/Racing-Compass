@@ -1,4 +1,4 @@
-package rafael.rocha.mshistory.raceresult.document;
+package rafael.rocha.mshistory.domain.raceresult.document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

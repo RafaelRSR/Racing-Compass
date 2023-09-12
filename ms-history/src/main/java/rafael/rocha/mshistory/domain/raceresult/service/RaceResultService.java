@@ -1,9 +1,9 @@
-package rafael.rocha.mshistory.raceresult.service;
+package rafael.rocha.mshistory.domain.raceresult.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rafael.rocha.mshistory.raceresult.document.RaceResultDocument;
-import rafael.rocha.mshistory.raceresult.repository.RaceResultRepository;
+import rafael.rocha.mshistory.domain.raceresult.document.RaceResultDocument;
+import rafael.rocha.mshistory.domain.raceresult.repository.RaceResultRepository;
 
 import java.util.List;
 import java.util.Optional;
