@@ -14,7 +14,7 @@ import java.util.Date;
 public class RaceMessageConsumer {
 
     @Autowired
-    private RaceResultRepository raceRepository;
+    private RaceResultRepository raceResultRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -25,6 +25,6 @@ public class RaceMessageConsumer {
 
         raceResultDocument.setRaceDate(new Date());
 
-        raceRepository.save(raceResultDocument);
+        raceResultRepository.save(raceResultDocument);
     }
 }
