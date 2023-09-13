@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "3d949c31-b446-45e6-a5bd-125e179d4e25",
+		"name": "Racing Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17207272"
+	},
+	"item": [
+		{
+			"name": "MS-CARS",
+			"item": [
+				{
+					"name": "Get a car by Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"Chevrolet\",\r\n    \"model\": \"Blaze\",\r\n    \"year\": \"2023\",\r\n    \"pilot\": {\r\n        \"name\": \"Marie\",\r\n        \"age\": 25\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/cars/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cars",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"Chevrolet\",\r\n    \"model\": \"Blaze\",\r\n    \"year\": \"2021\",\r\n    \"pilot\": {\r\n        \"name\": \"Marie\",\r\n        \"age\": 25\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/cars/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cars",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Car By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/cars/delete/1{id}1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cars",
+								"delete",
+								"1{id}1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MS-RACES",
+			"item": [
+				{
+					"name": "Create Race",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cars\": [\r\n    {\r\n      \"brand\": \"Car Brand 1\",\r\n      \"model\": \"Car Model 1\",\r\n      \"year\": \"2020-01-15\",\r\n      \"pilot\": {\r\n        \"name\": \"Pilot 1\",\r\n        \"age\": 35\r\n      }\r\n    },\r\n    {\r\n      \"brand\": \"Car Brand 2\",\r\n      \"model\": \"Car Model 2\",\r\n      \"year\": \"2021-03-20\",\r\n      \"pilot\": {\r\n        \"name\": \"Pilot 2\",\r\n        \"age\": 32\r\n      }\r\n    },\r\n        {\r\n      \"brand\": \"Car Brand 3\",\r\n      \"model\": \"Car Model 3\",\r\n      \"year\": \"2019-10-24\",\r\n      \"pilot\": {\r\n        \"name\": \"Pilot 3\",\r\n        \"age\": 33\r\n      }\r\n    }\r\n  ],\r\n  \"track\": {\r\n    \"name\": \"Monaco GP\",\r\n    \"country\": \"\",\r\n    \"date\": \"2022-05-03\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/race/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"race",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Simulate a Race by Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/race/simulate/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"race",
+								"simulate",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MS-HISTORY",
+			"item": [
+				{
+					"name": "Get All Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/race-results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"race-results"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Result By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/race-results/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"race-results",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
