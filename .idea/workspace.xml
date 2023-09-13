@@ -69,6 +69,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\Racing-Compass-dev\ms-history\src\main\resources\docs" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="rafael.rocha.mshistory.domain.raceresult.controller" />
       <recent name="rafael.rocha.mshistory.domain.raceresult.service" />
@@ -175,7 +178,7 @@
       <workItem from="1694555638715" duration="1711000" />
       <workItem from="1694565509723" duration="181000" />
       <workItem from="1694578909851" duration="639000" />
-      <workItem from="1694621438014" duration="2246000" />
+      <workItem from="1694621438014" duration="2589000" />
     </task>
     <servers />
   </component>

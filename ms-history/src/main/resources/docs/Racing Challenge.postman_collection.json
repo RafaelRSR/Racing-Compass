@@ -13,7 +13,21 @@
 					"name": "Get a car by Id",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/cars/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cars",
+								"get",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -120,7 +134,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Car Controller Endpoints\n\n#### 1\\. List All Cars\n\n- **HTTP Method:** GET\n- **Endpoint:** `/v1/cars`\n- **Description:** This endpoint retrieves a list of all cars in the system.\n- **Response:** A list of car objects.\n    \n\n#### 2\\. Get Car by ID\n\n- **HTTP Method:** GET\n- **Endpoint:** `/v1/cars/get/{carId}`\n- **Description:** Retrieves detailed information about a car by its unique ID.\n- **Path Variable:** `{carId}` - The ID of the car to retrieve.\n- **Response:** The car object with the specified ID if found, or a \"Not Found\" message if the car does not exist.\n    \n\n#### 3\\. Create Car\n\n- **HTTP Method:** POST\n- **Endpoint:** `/v1/cars/create`\n- **Description:** Creates a new car with the provided details.\n- **Request Body:** A JSON object containing car information (`CarRequestDTO`).\n- **Response:** The newly created car object along with a `201 Created` status code.\n    \n\n#### 4\\. Update Car\n\n- **HTTP Method:** PUT\n- **Endpoint:** `/v1/cars/update/{carId}`\n- **Description:** Updates an existing car with new details based on its unique ID.\n- **Path Variable:** `{carId}` - The ID of the car to update.\n- **Request Body:** A JSON object containing car information (`CarRequestDTO`).\n- **Response:** The updated car object if successful, or a \"Not Found\" message if the car does not exist.\n    \n\n#### 5\\. Delete Car\n\n- **HTTP Method:** DELETE\n- **Endpoint:** `/v1/cars/delete/{carId}`\n- **Description:** Deletes a car from the system based on its unique ID.\n- **Path Variable:** `{carId}` - The ID of the car to delete.\n- **Response:** A success message indicating that the car with the specified ID has been deleted."
 		},
 		{
 			"name": "MS-RACES",
@@ -177,7 +192,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "### Race Controller Endpoints\n\n#### 1\\. Create Race\n\n- **HTTP Method:** POST\n    \n- **Endpoint:** `/v1/race/create`\n    \n- **Description:** This endpoint allows the creation of a new race with the provided race details.\n    \n- **Request Body:** A JSON object containing race information (`RaceRequestDTO`).\n    \n- **Response:** The newly created race object along with a `201 Created` status code.\n    \n\n#### 2\\. Simulate Race and Send Result\n\n- **HTTP Method:** POST\n    \n- **Endpoint:** `/v1/race/simulate/{raceId}`\n    \n- **Description:** Initiates the simulation of a race and sends back the race results.\n    \n- **Path Variable:** `{raceId}` - The ID of the race to simulate.\n    \n- **Response:** A list of race result objects (`RaceResultDTO`) along with an `HTTP 200 OK` status code."
 		},
 		{
 			"name": "MS-HISTORY",
@@ -224,7 +240,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "### Race Result Controller Endpoints\n\n#### 1\\. Get All Race Results\n\n- **HTTP Method:** GET\n    \n- **Endpoint:** `/v1/race-results`\n    \n- **Description:** This endpoint retrieves a list of all race results stored in the system.\n    \n- **Response:** A JSON array containing a list of race result objects (`RaceResultDocument`) along with an `HTTP 200 OK` status code.\n    \n\n#### 2\\. Get Race Result by ID\n\n- **HTTP Method:** GET\n    \n- **Endpoint:** `/v1/race-results/get/{id}`\n    \n- **Description:** Retrieves a specific race result by its unique ID.\n    \n- **Path Variable:** `{id}` - The ID of the race result to retrieve.\n    \n- **Response:** If the race result is found, it returns a JSON object with race result details along with an `HTTP 200 OK` status code. If the race result is not found, it returns an `HTTP 404 Not Found` status code with an error message."
 		}
 	]
 }
